@@ -827,7 +827,7 @@ function btn_menu:pressed()
 			local updater
 			if response then
 				local fun = load(response.readAll(), nil, 't', _ENV)
-				if fun then updater = fun() end
+				if fun then updater = fun(APPDIR) end
 			end
 			local ok, err = updater.update()
 		end
