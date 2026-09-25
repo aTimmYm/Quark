@@ -42,7 +42,7 @@ for line in server_manifest_sum:gmatch('[^\n]+') do
     end
 end
 
-local fd = io.open(path .. 'manifest')
+local fd = io.open(path .. 'manifest', 'w')
 if fd then
 	fd:write(server_manifest_sum); fd:close()
 end
