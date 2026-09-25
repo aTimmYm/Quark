@@ -24,20 +24,25 @@ else
 	return print(err)
 end
 for line in server_manifest_sum:gmatch('[^\n]+') do
-	local download_path = line:sub(65)
-	local request, h_err = http.get(downloadLink .. download_path)
-	if request then
-		local fd, err = io.open(path .. download_path, 'r')
-		if fd then
-			local write_ok, write_err = pcall(fd.write, fd, request.readAll())
-			fd:close()
-			if not write_ok then
-				return print(write_err)
-			end
-		else
-			return print(err)
-		end
-	else
-		return print(h_err)
-	end
+    local download_path = line:sub(65)
+    local request, h_err = http.get(downloadLink .. download_path)
+    if request then
+        local fd, err = io.open(path .. download_path, 'w')
+        if fd then
+            local write_ok, write_err = pcall(fd.write, fd, request.readAll())
+            fd:close()
+            if not write_ok then
+                return print(write_err)
+            end
+        else
+            return print(err)
+        end
+    else
+        return print(h_err)
+    end
+end
+
+local fd = io.open(path .. 'manifest')
+if fd then
+	fd:write(server_manifest_sum); fd:close()
 end

@@ -61,7 +61,7 @@ local function update()
 
 		local request, h_err = http.get(downloadLink .. path)
 		if request then
-			local fd, err = io.open(absPath .. path, 'r')
+			local fd, err = io.open(absPath .. path, 'w')
 			if fd then
 				local write_ok, write_err = pcall(fd.write, fd, request.readAll())
 				fd:close()
