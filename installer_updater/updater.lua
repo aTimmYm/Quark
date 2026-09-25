@@ -1,4 +1,5 @@
-local link = 'https://raw.githubusercontent.com/aTimmYm/Quark/refs/heads/build/'
+local downloadLink = 'https://raw.githubusercontent.com/aTimmYm/Quark/refs/heads/build/'
+local link = 'https://raw.githubusercontent.com/aTimmYm/Quark/refs/heads/main/'
 
 local absPath = ...
 
@@ -58,7 +59,7 @@ local function update()
 			new_files[#new_files + 1] = path
 		end
 
-		local request, h_err = http.get(link .. path)
+		local request, h_err = http.get(downloadLink .. path)
 		if request then
 			local fd, err = io.open(absPath .. path, 'r')
 			if fd then
@@ -75,8 +76,13 @@ local function update()
 		end
 	end
 
-	for i = 1, #delete do
-		fs.delete(absPath .. delete[i])
+    for i = 1, #delete do
+        fs.delete(absPath .. delete[i])
+    end
+
+    local fd = io.open(absPath .. 'manifest', 'w')
+    if fd then
+		fd:write(server_manifest_sum); fd:close()
 	end
 
 	return true

@@ -1,4 +1,5 @@
-local link = 'https://raw.githubusercontent.com/aTimmYm/Quark/refs/heads/build/'
+local link = 'https://raw.githubusercontent.com/aTimmYm/Quark/refs/heads/main/'
+local downloadLink = 'https://raw.githubusercontent.com/aTimmYm/Quark/refs/heads/build/'
 
 local path = ''
 
@@ -24,7 +25,7 @@ else
 end
 for line in server_manifest_sum:gmatch('[^\n]+') do
 	local download_path = line:sub(65)
-	local request, h_err = http.get(link .. download_path)
+	local request, h_err = http.get(downloadLink .. download_path)
 	if request then
 		local fd, err = io.open(path .. download_path, 'r')
 		if fd then
