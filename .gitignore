@@ -1,2 +1,3 @@
-/Data/Settings/user.json
-/Data/projects/*
+src/Data/Settings/user.json
+src/Data/projects/*
+.zed
