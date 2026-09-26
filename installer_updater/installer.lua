@@ -1,7 +1,7 @@
 local link = 'https://raw.githubusercontent.com/aTimmYm/Quark/refs/heads/main/'
 local downloadLink = 'https://raw.githubusercontent.com/aTimmYm/Quark/refs/heads/build/'
 
-local downloaded, row_colors = {}, {colors.white, colors.ligtGray, colors.gray}
+local downloaded, row_colors = {}, {colors.white, colors.lightGray, colors.gray}
 local function drawDownloaded(path)
     table.insert(downloaded, 1, path)
     downloaded[4] = nil
