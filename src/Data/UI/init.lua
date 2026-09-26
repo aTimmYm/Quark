@@ -12,9 +12,8 @@ if not fs then
 	os.cancelTimer = vfs.timer_cancel
 end
 
+local myPath = '/'..select(2, ...):match("(.*)/[^/]*$")..'/'
 
-local absPath = '/Quark/Data/'
-local myPath = absPath .. 'UI/'
 local oldPath = package.path
 package.path = package.path .. ';' .. myPath .. '?;' .. myPath .. '?.lua;' .. myPath .. '?/init.lua'
 local UI = {}
