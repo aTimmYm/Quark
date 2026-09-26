@@ -1,7 +1,7 @@
 local downloadLink = 'https://raw.githubusercontent.com/aTimmYm/Quark/refs/heads/build/'
 local link = 'https://raw.githubusercontent.com/aTimmYm/Quark/refs/heads/main/'
 
-local absPath = ...
+local absPath
 
 local function updateError(err, current_files, new_files)
 	for i = 1, #new_files do fs.delete(absPath .. new_files[i]) end
@@ -16,7 +16,8 @@ local function updateError(err, current_files, new_files)
 	return nil, err
 end
 
-local function update()
+local function update(path)
+	absPath = path
 	local local_manifest, server_manifest = {}, {}
 	for line in io.lines(absPath .. 'manifest') do
 		local_manifest[line:sub(65)] = line:sub(1, 64)
@@ -40,11 +41,14 @@ local function update()
 			delete[#delete + 1] = path
 		end
 	end
-	for path, hash in pairs(server_manifest) do
-		local local_hash = local_manifest[path]
-		if local_hash ~= hash then
-			download[#download + 1] = path
-		end
+    for path, hash in pairs(server_manifest) do
+        local local_hash = local_manifest[path]
+        if local_hash ~= hash then
+            download[#download + 1] = path
+        end
+    end
+	if #delete == 0 and #download == 0 then
+		return nil, 'No updates'
 	end
 
 	local current_files, new_files = {}, {}
@@ -89,4 +93,4 @@ local function update()
 end
 
 
-return { update = update }
+return update

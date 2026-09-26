@@ -44,23 +44,23 @@ Quark aims to make development in CC:Tweaked more enjoyable without getting in t
 
 ### Start Page
 
-![Quark Start Page](screenshots/start_page.png)
+![Quark Start Page](assets/start_page.png)
 
 ### Editor
 
-![Quark Editor](screenshots/editor.png)
+![Quark Editor](assets/editor.png)
 
 ### Project View
 
-![Quark Project View](screenshots/project.png)
+![Quark Project View](assets/project.png)
 
 ### Search
 
-![Quark Search](screenshots/search.png)
+![Quark Search](assets/search.png)
 
 ### Menu
 
-![Quark Menu](screenshots/opened_menu.png)
+![Quark Menu](assets/opened_menu.png)
 
 ---
 

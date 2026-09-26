@@ -1,6 +1,20 @@
 local link = 'https://raw.githubusercontent.com/aTimmYm/Quark/refs/heads/main/'
 local downloadLink = 'https://raw.githubusercontent.com/aTimmYm/Quark/refs/heads/build/'
 
+local downloaded, row_colors = {}, {colors.white, colors.ligttGray, colors.gray}
+local function drawDownloaded(path)
+    table.insert(downloaded, 1, path)
+    downloaded[4] = nil
+    local x, y = term.getCursorPos()
+    term.setBackgroundColor(colors.black)
+    for i = 1, #downloaded do
+        term.setCursorPos(x, y + i - 1)
+        term.setTextColor(row_colors[i])
+        term.write(downloaded[i])
+    end
+	term.setCursorPos(x, y)
+end
+
 local path = ''
 
 while true do
@@ -37,6 +51,7 @@ for line in server_manifest_sum:gmatch('[^\n]+') do
         else
             return print(err)
         end
+        drawDownloaded(path .. download_path)
     else
         return print(h_err)
     end
@@ -44,5 +59,6 @@ end
 
 local fd = io.open(path .. 'manifest', 'w')
 if fd then
-	fd:write(server_manifest_sum); fd:close()
+    fd:write(server_manifest_sum); fd:close()
 end
+print('')

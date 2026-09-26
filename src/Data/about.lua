@@ -67,7 +67,7 @@ local function _new(args)
 		bg = colors.lightGray, fg = colors.white
 	})
 	function btn_update:pressed()
-		if box.onUpdate then return box:onUpdate() end
+		if box.onUpdate then return box:onUpdate(btn_update) end
 	end
 
 	return box

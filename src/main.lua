@@ -82,6 +82,7 @@ local About = require 'Data.about'
 local options_init = require 'Data.options'
 UI.Editor = require 'Data.editor'.new
 local TabBar = require 'Data.tabbar_extended'.new
+local updater
 local link = 'https://raw.githubusercontent.com/aTimmYm/Quark/refs/heads/main/'
 
 local function size_new_tabs(self)
@@ -822,14 +823,25 @@ function btn_menu:pressed()
 			return root:onLayout()
 		end
 
-		function about_view:onUpdate()
-			local response, err = http.get(link .. 'installer_updater/updater.lua')
-			local updater
-			if response then
-				local fun = load(response.readAll(), nil, 't', _ENV)
-				if fun then updater = fun(APPDIR) end
+		function about_view:onUpdate(btn)
+			if not updater then
+				local response, err = http.get(link .. 'installer_updater/updater.lua')
+				if response then
+					local fun = load(response.readAll(), nil, 't', _ENV)
+					if fun then updater = fun() end
+				end
 			end
-			local ok, err = updater.update()
+			local ok, message = updater(APPDIR)
+			if not ok then
+				btn.text = message
+				if message ~= 'No updates' then
+					btn.bg = colors.red
+				end
+            else
+				btn.bg = colors.green
+				btn.text = 'Success'
+			end
+			btn.dirty = true
 		end
 	end)
 	menu:addItem('Exit', function() return os.queueEvent('terminate') end)
