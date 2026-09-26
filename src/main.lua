@@ -831,7 +831,7 @@ function btn_menu:pressed()
 					if fun then updater = fun() end
 				end
 			end
-			local ok, message = updater(APPDIR)
+			local ok, message = updater(APPDIR .. '/')
 			if not ok then
 				btn.text = message
 				if message ~= 'No updates' then
