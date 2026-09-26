@@ -5,14 +5,15 @@ local downloaded, row_colors = {}, {colors.white, colors.lightGray, colors.gray}
 local function drawDownloaded(path)
     table.insert(downloaded, 1, path)
     downloaded[4] = nil
-    local x, y = term.getCursorPos()
+    local w = term.getSize()
     term.setBackgroundColor(colors.black)
     for i = 1, #downloaded do
-        term.setCursorPos(x, y + i - 1)
+    	local text = downloaded[i]
+        term.setCursorPos(downloaded.x, downloaded.y + i - 1)
         term.setTextColor(row_colors[i])
-        term.write(downloaded[i])
+        term.write(text..(' '):rep(w - #text))
     end
-	term.setCursorPos(x, y)
+	term.setCursorPos(downloaded.x, downloaded.y)
 end
 
 local path = ''
@@ -29,6 +30,7 @@ while true do
 	end
 end
 
+downloaded.x, downloaded.y = term.getCursorPos()
 path = path .. 'Quark/'
 local response, err = http.get(link .. 'manifest')
 local server_manifest_sum
@@ -61,4 +63,4 @@ local fd = io.open(path .. 'manifest', 'w')
 if fd then
     fd:write(server_manifest_sum); fd:close()
 end
-print('')
+term.setCursorPos(downloaded.x, downloaded.y + #downloaded)
