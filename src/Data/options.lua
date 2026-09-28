@@ -44,7 +44,7 @@ local default_colors = {
 }
 
 local pages = {
-	['Colors'] = function(container, selector)
+	Colors = function(container, selector)
 		local x = selector.localX + selector.w
 		local page_container = container:addChild(UI.Container {
 			x = x, y = 2,
@@ -123,7 +123,7 @@ local pages = {
 		return page_container
 	end,
 
-	['Main'] = function(container, selector)
+	Main = function(container, selector)
 		local x = selector.localX + selector.w
 		local page_container = container:addChild(UI.Container {
 			x = x, y = 2,
@@ -153,7 +153,7 @@ local pages = {
 		})
 		function dropdown:pressed(item)
 			if container.onChangeSettings then
-				container:onChangeSettings('editor.tab_size', tonumber(item))
+				return container:onChangeSettings('editor.tab_size', tonumber(item))
 			end
 		end
 
@@ -176,7 +176,7 @@ local pages = {
 		})
 		function indent_dropdown:pressed(name)
 			if container.onChangeSettings then
-				container:onChangeSettings('editor.indent_tabs', name)
+				return container:onChangeSettings('editor.indent_tabs', name)
 			end
 		end
 
@@ -204,7 +204,7 @@ local pages = {
 		})
 		function endl_dropdown:pressed(item_name)
 			if container.onChangeSettings then
-				container:onChangeSettings('editor.line_ending', item_name)
+				return container:onChangeSettings('editor.line_ending', item_name)
 			end
 		end
 
@@ -246,7 +246,7 @@ local pages = {
 
 		function line_indents_dropdown:pressed(item_name)
 			if container.onChangeSettings then
-				container:onChangeSettings('line_indents_enabled', (item_name == 'Enabled'))
+				return container:onChangeSettings('line_indents_enabled', (item_name == 'Enabled'))
 			end
 		end
 
