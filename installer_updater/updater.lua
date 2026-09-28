@@ -1,4 +1,4 @@
-local downloadLink = 'https://raw.githubusercontent.com/aTimmYm/Quark/refs/heads/build/'
+local downloadLink = 'https://raw.githubusercontent.com/aTimmYm/Quark/refs/heads/main/build/'
 local link = 'https://raw.githubusercontent.com/aTimmYm/Quark/refs/heads/main/'
 
 local absPath

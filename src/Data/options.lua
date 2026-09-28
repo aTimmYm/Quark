@@ -100,7 +100,7 @@ local pages = {
 			scol_selector:setSelectedColor(user[key])
 			function scol_selector:pressed(col)
 				if container.onChangeSettings then
-					container:onChangeSettings('editor.color', key, col)
+					return container:onChangeSettings('editor.color', key, col)
 				end
 			end
 

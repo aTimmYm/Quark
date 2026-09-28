@@ -420,8 +420,8 @@ local onCommand = {
 
 		root.go_to_line = go_to_line
 		root.focus = go_to_line
-	end,
-	Save = function (editor)
+    end,
+    Save = function (editor)
 		save()
 	end
 }

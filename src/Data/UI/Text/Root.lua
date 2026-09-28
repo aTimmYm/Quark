@@ -84,7 +84,7 @@ function Root.new(w, h)
 	-- local w, h = term.getSize(gm)
 	local value = gm and 0 or 1
 	local instance = Container.new { x = value, y = value, w = w, h = h }
-	-- instance.gm = gm
+	instance.gm = gm
 	instance.focus = nil
 	instance.clipboard = {}
 
